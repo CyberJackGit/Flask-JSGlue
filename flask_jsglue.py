@@ -15,6 +15,7 @@ def get_routes(app):
         rule = r.rule
         rule_args = [x.split(':')[-1] for x in rule_parser.findall(rule)]
         rule_tr = splitter.split(rule)
+        rule_tr[0] = '/{}{}'.format(app.config['APP_PREFIX'], rule_tr[0])
         output.append((endpoint, rule_tr, rule_args))
     return sorted(output, key=lambda x: len(x[1]), reverse=True)
 
